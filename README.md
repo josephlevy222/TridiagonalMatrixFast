@@ -227,7 +227,7 @@ You can test correctness using small known systems:
 - Identity and scalar multiples
 - Symmetric positive definite tridiagonal matrices
 
-I can generate a full test suite if you want.
+The test folder has a number of tests already but is not comprehensive.
 
 ---
 
