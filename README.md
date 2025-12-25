@@ -82,7 +82,7 @@ let cond = lu.approximateConditionNumber
 Add this to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/josephlevy222/TridiagonalMatrix.git", from: "1.0.0")
+.package(url: "https://github.com/josephlevy222/TridiagonalMatrixFast.git", from: "1.0.0")
 ```
 
 Then add the dependency to your target:
@@ -91,7 +91,7 @@ Then add the dependency to your target:
 .target(
     name: "MyApp",
     dependencies: [
-        .product(name: "TridiagonalMatrix", package: "TridiagonalMatrix")
+        .product(name: "TridiagonalMatrixFast", package: "TridiagonalMatrixFast")
     ]
 )
 ```
