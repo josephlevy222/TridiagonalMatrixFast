@@ -25,14 +25,14 @@ public typealias CMutableVoidPtr = UnsafeMutableRawPointer
 // MARK: - LAPACK / BLAS Function Typealiases
 
 /// LAPACK tridiagonal LU factorization (`*gttrf`).
-public typealias gttrf<T> = (
+public typealias GttrfFunction<T> = (
 	_ N: CMutablePtr<CInt>?, _ DL: CMutablePtr<T>?, _ D: CMutablePtr<T>?,
 	_ DU: CMutablePtr<T>?, _ DU2: CMutablePtr<T>?, _ IPIV: CMutablePtr<CInt>?,
 	_ INFO: CMutablePtr<CInt>?
 ) -> CInt
 
 /// LAPACK tridiagonal triangular solve (`*gttrs`).
-public typealias gttrs<T> = (
+public typealias GttrsFunction<T> = (
 	_ TRANS: CMutablePtr<Int8>?, _ N: CMutablePtr<CInt>?, _ NRHS: CMutablePtr<CInt>?,
 	_ DL: CMutablePtr<T>?, _ D: CMutablePtr<T>?, _ DU: CMutablePtr<T>?,
 	_ DU2: CMutablePtr<T>?, _ IPIV: CMutablePtr<CInt>?, _ B: CMutablePtr<T>?,
@@ -40,7 +40,7 @@ public typealias gttrs<T> = (
 ) -> CInt
 
 /// LAPACK reciprocal condition number estimator (`*gtcon`) for real types.
-public typealias gtcon<T, M, W> = (
+public typealias GtconFunction<T, M, W> = (
 	_ NORM: CMutablePtr<Int8>?, _ N: CMutablePtr<CInt>?, _ DL: CMutablePtr<T>?,
 	_ D: CMutablePtr<T>?, _ DU: CMutablePtr<T>?, _ DU2: CMutablePtr<T>?,
 	_ IPIV: CMutablePtr<CInt>?, _ anorm: CMutablePtr<M>?, _ rcond: CMutablePtr<M>?,
@@ -48,7 +48,7 @@ public typealias gtcon<T, M, W> = (
 ) -> CInt
 
 /// LAPACK reciprocal condition number estimator (`*gtcon`) for complex types.
-public typealias gtconComplex<T, M, W> = (
+public typealias GtconComplexFunction<T, M, W> = (
 	_ NORM: CMutablePtr<Int8>?, _ N: CMutablePtr<CInt>?, _ DL: CMutablePtr<T>?,
 	_ D: CMutablePtr<T>?, _ DU: CMutablePtr<T>?, _ DU2: CMutablePtr<T>?,
 	_ IPIV: CMutablePtr<CInt>?, _ anorm: CMutablePtr<M>?, _ rcond: CMutablePtr<M>?,
@@ -56,13 +56,13 @@ public typealias gtconComplex<T, M, W> = (
 ) -> CInt
 
 /// BLAS AXPY signature: `y ← a·x + y`.
-public typealias axpy<T> = (
+public typealias BLASAxpyFunction<T> = (
 	_ n: Int32, _ a: T, _ x: UnsafePointer<T>, _ incx: Int32,
 	_ y: CMutablePtr<T>, _ incy: Int32
 ) -> Void
 
 /// vDSP vector operation signature: `c = a ∘ b` with strides.
-public typealias DSPSignature<T> = (
+public typealias DSPFunction<T> = (
 	_ a: UnsafePointer<T>, _ sa: Int, _ b: UnsafePointer<T>, _ sb: Int,
 	_ c: CMutablePtr<T>, _ sc: Int, _ n: Int
 ) -> Void

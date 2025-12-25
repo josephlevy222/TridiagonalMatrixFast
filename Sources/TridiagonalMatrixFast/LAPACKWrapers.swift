@@ -11,9 +11,9 @@ import Numerics
 /// Wrapper for real `gtcon` that allocates `iwork` if needed.
 ///
 /// - Parameters mirror the LAPACK `*gtcon` signature, with optional `iwork`.
-@inlinable
-public func gtcon_<T, R>(
-	_ cFunction: @escaping gtcon<T, R, T>,
+@usableFromInline @inline(__always)
+func gtcon_<T, R>(
+	_ cFunction: @escaping GtconFunction<T, R, T>,
 	_ norm: CMutablePtr<Int8>?, _ n: CMutablePtr<CInt>?,
 	_ dl: CMutablePtr<T>?, _ d: CMutablePtr<T>?, _ du: CMutablePtr<T>?,
 	_ du2: CMutablePtr<T>?, _ ipiv: CMutablePtr<CInt>?,
@@ -34,9 +34,9 @@ public func gtcon_<T, R>(
 /// Wrapper for complex `gtcon` that allocates `work` if needed.
 ///
 /// - Note: `iwork` is ignored for complex variants.
-@inlinable
-public func gtcon_<T, R>(
-	_ cFunction: @escaping gtconComplex<T, R, T>,
+@usableFromInline @inline(__always)
+func gtcon_<T, R>(
+	_ cFunction: @escaping GtconComplexFunction<T, R, T>,
 	_ norm: CMutablePtr<Int8>?, _ n: CMutablePtr<CInt>?,
 	_ dl: CMutablePtr<T>?, _ d: CMutablePtr<T>?, _ du: CMutablePtr<T>?,
 	_ du2: CMutablePtr<T>?, _ ipiv: CMutablePtr<CInt>?,
@@ -64,8 +64,8 @@ public func gtcon_<T, R>(
 ///   - a: Scalar multiplier
 ///   - x: Input vector
 ///   - y: Output vector (updated in-place)
-@inlinable
-public func axpy_<CType>(
+@usableFromInline @inline(__always)
+func axpy_<CType>(
 	_ cFunction: @escaping (
 		_ N: Int32, _ a: CVoidPtr?, _ X: CVoidPtr?, _ incX: Int32,
 		_ Y: CMutableVoidPtr?, _ incY: Int32
@@ -86,9 +86,9 @@ public func axpy_<CType>(
 ///   - a: Scalar multiplier
 ///   - x: Input vector
 ///   - y: Output vector (updated in-place)
-@inlinable
-public func axpy_<T>(
-	_ cFunction: @escaping axpy<T>,
+@usableFromInline @inline(__always)
+func axpy_<T>(
+	_ cFunction: @escaping BLASAxpyFunction<T>,
 	_ n: Int32, _ a: T, _ x: UnsafePointer<T>, _ incx: Int32,
 	_ y: CMutablePtr<T>, _ incy: Int32
 ) {

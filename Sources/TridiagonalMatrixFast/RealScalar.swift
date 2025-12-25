@@ -15,25 +15,25 @@ public protocol RealScalar: ScalarField & FloatingPoint & Real {
 	associatedtype WType
 	
 	/// Complex tridiagonal LU factorization.
-	static var cgttrf: gttrf<WType> { get }
+	static var cgttrf: GttrfFunction<WType> { get }
 	
 	/// Complex tridiagonal triangular solve.
-	static var cgttrs: gttrs<WType> { get }
+	static var cgttrs: GttrsFunction<WType> { get }
 	
 	/// Complex reciprocal condition number estimator.
-	static var cgtcon: gtcon<WType, Self, WType> { get }
+	static var cgtcon: GtconFunction<WType, Self, WType> { get }
 	
 	/// Complex AXPY.
-	static var caxpy: axpy<WType> { get }
+	static var caxpy: BLASAxpyFunction<WType> { get }
 	
 	/// vDSP multiply-add for real scalars.
-	static var vma: DSPSignature<Self> { get }
+	static var vma: DSPFunction<Self> { get }
 	
 	/// vDSP multiply for real scalars.
-	static var vmul: DSPSignature<Self> { get }
+	static var vmul: DSPFunction<Self> { get }
 	
 	/// vDSP subtract for real scalars.
-	static var vsub: DSPSignature<Self> { get }
+	static var vsub: DSPFunction<Self> { get }
 	
 	/// Complex multiply-add: `y ← A·x + y`.
 	static var cAXpY: MultiplyAdd<Complex<Self>> { get }

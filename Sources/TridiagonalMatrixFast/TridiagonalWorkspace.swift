@@ -11,10 +11,10 @@ import Numerics
 /// Manages:
 /// - Real/complex work arrays
 /// - Integer work arrays (real types only)
-public final class TridiagonalWorkspace<T: ScalarField> {
+@usableFromInline final class TridiagonalWorkspace<T: ScalarField> {
 	
-	public private(set) var work: CMutablePtr<T.CType>
-	public private(set) var iwork: CMutablePtr<CInt>?
+	@usableFromInline var work: CMutablePtr<T.CType>
+	@usableFromInline var iwork: CMutablePtr<CInt>?
 	
 	private var capacityWork: Int
 	private var capacityIWork: Int
@@ -22,7 +22,7 @@ public final class TridiagonalWorkspace<T: ScalarField> {
 	/// Creates a workspace with an initial capacity.
 	///
 	/// - Parameter capacity: Initial matrix dimension estimate.
-	public init(capacity: Int = 0) {
+	@usableFromInline init(capacity: Int = 0) {
 		let n = max(1, capacity)
 		self.capacityWork = 2 * n
 		self.work = CMutablePtr<T.CType>.allocate(capacity: capacityWork)
@@ -45,7 +45,7 @@ public final class TridiagonalWorkspace<T: ScalarField> {
 	/// Returns a work buffer of sufficient size for a matrix of dimension `n`.
 	///
 	/// - Parameter n: Matrix dimension.
-	public func workBuffer(for n: Int) -> CMutablePtr<T.CType> {
+	@usableFromInline func workBuffer(for n: Int) -> CMutablePtr<T.CType> {
 		let required = max(1, 2 * n)
 		if capacityWork < required {
 			work.deallocate()
@@ -59,7 +59,7 @@ public final class TridiagonalWorkspace<T: ScalarField> {
 	///
 	/// - Parameter n: Matrix dimension.
 	/// - Returns: A pointer to an integer work buffer, or `nil` for complex types.
-	public func iworkBuffer(for n: Int) -> CMutablePtr<CInt>? {
+	@usableFromInline func iworkBuffer(for n: Int) -> CMutablePtr<CInt>? {
 		guard T.self is any RealScalar.Type else { return nil }
 		let required = max(1, n)
 		if capacityIWork < required {

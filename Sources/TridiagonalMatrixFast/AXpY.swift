@@ -12,7 +12,8 @@ import Numerics
 ///   - a: Scalar multiplier.
 ///   - x: Input vector.
 ///   - y: Vector to be updated.
-public func aXpY_Inplace<T: ScalarField>(a: T, x: [T], y: inout [T]) {
+@usableFromInline @inline(__always)
+func aXpY_Inplace<T: ScalarField>(a: T, x: [T], y: inout [T]) {
 	precondition(x.count == y.count, "Vector size mismatch")
 	let n = Int32(x.count)
 	if n == 0 { return }
@@ -26,7 +27,8 @@ public func aXpY_Inplace<T: ScalarField>(a: T, x: [T], y: inout [T]) {
 ///   - x: Input vector.
 ///   - y: Input vector.
 /// - Returns: The sum `a·x + y`.
-public func aXpY<T: ScalarField>(a: T, x: [T], y: [T]) -> [T] {
+@usableFromInline @inline(__always)
+func aXpY<T: ScalarField>(a: T, x: [T], y: [T]) -> [T] {
 	var out = y
 	aXpY_Inplace(a: a, x: x, y: &out)
 	return out
@@ -35,8 +37,8 @@ public func aXpY<T: ScalarField>(a: T, x: [T], y: [T]) -> [T] {
 // MARK: - Internal AXpY Implementations
 
 /// Real scalar optimized implementation of `y ← A·x + y` for tridiagonal `A`.
-@inlinable
-public func AXpY_<T: RealScalar>(
+@usableFromInline @inline(__always)
+func AXpY_<T: RealScalar>(
 	_ A: TridiagonalMatrix<T>, _ x: [T], _ y: inout [T]
 ) -> [T] {
 	let n = x.count
@@ -79,8 +81,8 @@ public func AXpY_<T: RealScalar>(
 }
 
 /// Helper: complex multiply-add for a band: `y += band * x`.
-@inline(__always)
-public func complexVMA<T: RealScalar>(
+@usableFromInline @inline(__always)
+func complexVMA<T: RealScalar>(
 	_ band: [Complex<T>],
 	_ x: UnsafePointer<T>,
 	_ y: CMutablePtr<T>,
@@ -102,8 +104,8 @@ public func complexVMA<T: RealScalar>(
 }
 
 /// Complex scalar implementation of `y ← A·x + y` for tridiagonal `A`.
-@inlinable
-public func AXpY_<T: RealScalar>(
+@usableFromInline @inline(__always)
+func AXpY_<T: RealScalar>(
 	_ A: TridiagonalMatrix<Complex<T>>,
 	_ x: [Complex<T>],
 	_ y: inout [Complex<T>]
@@ -134,8 +136,7 @@ public func AXpY_<T: RealScalar>(
 }
 
 /// Complex AXpY using a shared temporary buffer for diagonal and off-diagonals.
-@inlinable
-internal func computeAXpYWithTemps<T: RealScalar>(
+@inlinable func computeAXpYWithTemps<T: RealScalar>(
 	_ A: TridiagonalMatrix<Complex<T>>,
 	x: [Complex<T>],
 	y: inout [Complex<T>],

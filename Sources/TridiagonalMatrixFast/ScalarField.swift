@@ -24,16 +24,16 @@ public protocol ScalarField: AlgebraicField where Magnitude: FloatingPoint {
 	static var one: Self { get }
 	
 	/// LAPACK tridiagonal LU factorization.
-	static var gttrf: gttrf<Self> { get }
+	static var gttrf: GttrfFunction<Self> { get }
 	
 	/// LAPACK tridiagonal triangular solve.
-	static var gttrs: gttrs<Self> { get }
+	static var gttrs: GttrsFunction<Self> { get }
 	
 	/// LAPACK reciprocal condition number estimator.
-	static var gtcon: gtcon<Self, Magnitude, CType> { get }
+	static var gtcon: GtconFunction<Self, Magnitude, CType> { get }
 	
 	/// BLAS AXPY: `y ← a·x + y`.
-	static var axpy: axpy<Self> { get }
+	static var axpy: BLASAxpyFunction<Self> { get }
 	
 	/// High-level multiply-add: `y ← A·x + y`.
 	static var AXpY: MultiplyAdd<Self> { get }

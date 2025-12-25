@@ -12,8 +12,8 @@ import Numerics
 ///   - A: Tridiagonal matrix.
 ///   - x: Column vector.
 /// - Returns: The product `A·x`.
-@inlinable
-public func multiply_<T: RealScalar>(
+@usableFromInline @inline(__always)
+func multiply_<T: RealScalar>(
 	_ A: TridiagonalMatrix<T>, _ x: [T]
 ) -> [T] {
 	precondition(x.count == A.size, "Invalid column vector size")
@@ -56,8 +56,8 @@ public func multiply_<T: RealScalar>(
 ///   - A: Complex tridiagonal matrix.
 ///   - x: Complex column vector.
 /// - Returns: The product `A·x`.
-@inlinable
-public func multiply_<T: RealScalar>(
+@usableFromInline @inline(__always)
+func multiply_<T: RealScalar>(
 	_ A: TridiagonalMatrix<Complex<T>>,
 	_ x: [Complex<T>]
 ) -> [Complex<T>] {

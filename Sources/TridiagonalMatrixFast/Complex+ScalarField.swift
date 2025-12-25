@@ -10,7 +10,7 @@ extension Complex: ScalarField where RealType: RealScalar {
 	
 	public typealias CType = RealType.WType
 	
-	public static var gttrf: gttrf<Complex<RealType>> {
+	public static var gttrf: GttrfFunction<Complex<RealType>> {
 		{ n, dl, d, du, du2, ipiv, info in
 			reboundBands(
 				n: Int(n!.pointee),
@@ -25,7 +25,7 @@ extension Complex: ScalarField where RealType: RealScalar {
 		}
 	}
 	
-	public static var gttrs: gttrs<Complex<RealType>> {
+	public static var gttrs: GttrsFunction<Complex<RealType>> {
 		{ trans, n, nrhs, dl, d, du, du2, ipiv, b, ldb, info in
 			guard let b else { return -1 }
 			let countN = Int(n!.pointee)
@@ -49,7 +49,7 @@ extension Complex: ScalarField where RealType: RealScalar {
 		}
 	}
 	
-	public static var gtcon: gtcon<Complex<RealType>, RealType, CType> {
+	public static var gtcon: GtconFunction<Complex<RealType>, RealType, CType> {
 		{ norm, n, dl, d, du, du2, ipiv, anorm, rcond, work, iwork, info in
 			reboundBands(
 				n: Int(n!.pointee),
@@ -68,7 +68,7 @@ extension Complex: ScalarField where RealType: RealScalar {
 		}
 	}
 	
-	public static var axpy: axpy<Complex<RealType>> {
+	public static var axpy: BLASAxpyFunction<Complex<RealType>> {
 		{ n, a, x, incx, y, incy in
 			withUnsafeBytes(of: a) { aRaw in
 				let aC = aRaw.bindMemory(to: CType.self).baseAddress!
