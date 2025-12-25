@@ -205,6 +205,7 @@ Sources/
     ScalarField.swift
     RealScalar.swift
     LAPACKWrappers.swift
+    License
     Float+ScalarField.swift
     Double+ScalarField.swift
     Complex+ScalarField.swift
