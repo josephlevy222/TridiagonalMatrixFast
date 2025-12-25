@@ -82,7 +82,7 @@ let cond = lu.approximateConditionNumber
 Add this to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/yourname/TridiagonalMatrix.git", from: "1.0.0")
+.package(url: "https://github.com/josephlevy222/TridiagonalMatrix.git", from: "1.0.0")
 ```
 
 Then add the dependency to your target:
@@ -211,9 +211,8 @@ Sources/
     TridiagonalMatrix.swift
     TridiagonalLUMatrix.swift
     TridiagonalWorkspace.swift
-    Operations/
-      AXpY.swift
-      Multiply.swift
+    AXpY.swift
+    Multiply.swift
 ```
 
 ---
@@ -233,7 +232,7 @@ I can generate a full test suite if you want.
 
 ## **License**
 
-MIT (or whatever you choose).
+MIT 
 
 ---
 
@@ -244,11 +243,3 @@ If you want to extend the library (e.g., eigenvalues, banded matrices, sparse fo
 
 ---
 
-If you want, I can also generate:
-
-- A **logo** for the project
-- A **benchmark suite**
-- A **documentation website** (DocC)
-- A **CI workflow** for GitHub Actions
-
-Just tell me what direction you want to take this.
